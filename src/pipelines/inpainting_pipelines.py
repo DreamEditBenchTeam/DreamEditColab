@@ -14,16 +14,16 @@ from PIL import Image
 # os.makedirs("images", exist_ok=True)
 # os.makedirs("images/output", exist_ok=True)
 
-def inpaint_text_gligen(pipe, prompt, background_path, bounding_box, gligen_phrase, config):
+def inpaint_text_gligen(pipe, prompt, background_path, bounding_box, gligen_phrase, step):
     images = pipe(
         prompt,
         num_images_per_prompt=1,
         gligen_phrases=[gligen_phrase],
         gligen_inpaint_image=Image.open(background_path).convert('RGB'),
         gligen_boxes=[[x / 512 for x in bounding_box]],
-        gligen_scheduled_sampling_beta=config.gligen_scheduled_sampling_beta,
+        gligen_scheduled_sampling_beta=1,
         output_type="numpy",
-        num_inference_steps=config.num_inference_steps
+        num_inference_steps=step
     ).images
     return images
 
