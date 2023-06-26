@@ -1,0 +1,1 @@
+from DreamEditColab.ldmmodules.losses.contperceptual import LPIPSWithDiscriminator
